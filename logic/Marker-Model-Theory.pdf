@@ -1,0 +1,198 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\topmargin -1.5cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm 
+                         %\pagestyle{empty}       
+						 % Uncomment if don't want page numbers
+\parskip 0pt            % sets spacing between paragraphs
+                         %\renewcommand{\baselinestretch}{1.5} 
+						 % Uncomment for 1.5 spacing between lines
+\parindent 0pt		     % sets leading space for paragraphs
+\usepackage{mathtools}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}
+ { #1 \,\delimsize|\, #2 }
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\newcommand{\after}{\circ } 
+\newcommand{\la}{\langle } 
+\newcommand{\ra}{\rangle } 
+\newcommand{\ti}{\to \infty} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\A}{\forall}
+\newcommand{\mcC}{\mathcal{C}} 
+\newcommand{\rmn}{Riemann integral }
+\newcommand{\lbg}{Lesbegue }
+\newcommand{\satisfies}{\models} 
+\newcommand{\Mod}{\text{Mod}} 
+\newcommand{\inn}{\varepsilon}
+\newcommand{\ninn}{\not\varepsilon}
+\newcommand{\E}{\exists}
+\newcommand{\mfC}{\mathfrak{C}}
+\newcommand{\mfG}{\mathfrak{G}}
+\newcommand{\mfN}{\mathfrak{N}}
+\newcommand{\mfR}{\mathfrak{R}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\p}{\partial}
+\newcommand{\tens}{\otimes}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\Id}{\text{Id}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\s}{\sqrt}
+\newcommand{\half}{\frac{1}{2}}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,automata}
+\newtheorem{lem}{Lemma}
+\author{Adam Freilich}
+\title{A Facebook Profile}
+\begin{document}
+\maketitle
+%\textbf{Model Theory Problems}%\emph{ Adam Freilich}
+
+Section 1.4
+
+\begin{enumerate}[1]
+%1
+\item 
+
+	\begin{enumerate}[a)] 
+	\item I'm interpreting ``Boolean combination of $\phi_i$s'' to mean a member of the smallest set of formulae including all of the $\phi_i$s and closed under negation, conjuction and disjunction. This question, then asks to show that boolean combinations admit this ``normal form''. I will show this as follows: first, I will show there is a $\psi$ of this form such that $\models \phi_i \iff \psi$ and second, that if $\phi', \psi'$ admit this normal form, then so do $\phi' \land \psi', \neg \phi', \phi' \lor \psi'$. That there is a $\psi$ of this form such that $\models \phi_i \iff \psi$ follows from taking $S = \{x \in \mathbb{P}(\{1, \ldots, n\}) | x \ni i\}$. That formulae admiting this normal form are closed under $\lor$ follows by merely taking the union of the two sets $S$, and closure under $\land$ follows by taking the intersection. Negation follows by taking the complement. 
+	
+	\item Note that every atomic formula is trivially of this form. We show by induction on formula length that every formula is equivalent to one of this form. (Note that we will define formula length to be as follows $\E x \phi, \A x \phi, \neg \phi$ all have length one more than $\phi$s length and $\phi \land \psi, \phi \lor \psi$ have lengths one more than the sums of the lengths of $\phi, \psi$ and atomic formulae are of length 0). We are left to deal with 5 cases. Negations are easy (flip the quantifiers and negate $\psi$). As are the quantifier cases. I will show the case of $\phi \land \phi'$ and the $\lor$ case is very simialar. $(Q_1v_1\ldots Q_mv_m \psi ) \land ( Q'_1v_1\ldots Q'_nv_n \psi')$ is clearly equivalent to\[Q_1v_1\ldots Q_mv_mQ'_{1}v_{m+1}\ldots Q'_{n}v_{m+n} \left(\psi \land [v_{m+1}/v_1]\cdots[v_{m+n}/v_n]\psi'\right)\] where $[v_{m+1}/v_1]$ is inductively defined substitution of $v_{m+1}$ for $v_1$. 
+	\end{enumerate}
+
+\item  
+	\begin{enumerate}[a)] 
+	\item
+	Up to isomorphism there are only two finite groups of order 4, they are the klein four and the cyclic one. It suffice to say that there are four distinct elements, there are not five distinct elements, and that for every element of the group $x$, we have $x \cdot x \cdot x = x$ (which is not true in the cyclic one, but must be true in the klein four as every element is the identity or of order 2). To be more explicit, we can say \[(\E x \E y \E z \E w (x \neq y) \land  (x \neq z)\land  (x \neq w)\land  (y \neq z)\land  (y \neq w) \land  (w \neq z) \land\]\[ (\A v \; v = x \lor v = y \lor v = w \lor v = z))\]\[ \land (\A x \; (x \cdot x \cdot x = x))\]
+	
+	\item We enumerate the finitely many elements, $x_1, \ldots, x_n$ and state that these all must exist and are distinct. We can then also stipulate that for every relation $R_i \in \mathcal{R}$ that $R(\bar{x})$ ($\bar{x}$ is a vector of free variables) iff $R(\bar{x})$ (where $\bar{x}$ is some vector of elements in $\mathcal{M}$ which we named above). We do similarly for the function symbols. In short, we specify the number of elements, and their ``multiplication tables'' for lack of a better term. This characterizes the structure up to isomorphism, and in the case that $\mathcal{M}$ is a finite structure, this is actually a first order sentence. 
+	
+	\end{enumerate}
+
+\item It suffices to consider some canonization of the universe. i.e. without loss, take the universe to be $\kappa$. Note that, up to isomorphism, a structure is determined by its relation symbols and function symbols and constant symbols. We note as well that functions are uniquely determined by their graphs. We can bound the cardinality of the number of different functions and relations of finite arity by $2^\kappa$ if we consider them as subsets of $\kappa^n$ where $n$ is their arity (or 1 more than the arity for function symbols). Each constant can take at most $\kappa$ different values. In conclusion, we note that a countable product of sets of cardinality at most $2^\kappa$ is still bounded by that cardinality for infinite $\kappa$. 
+
+\item Recall that $T \models \phi$ means that any model $\mathcal{M}$ of $T$ is also a model of $\phi$. If we call $M_T$ the models of $T$, we know that all of $M_T$ models $\phi$. But $M_T = M_{T'}$ by definition. So all of $M_{T'}$ models $\phi$ as well. So $T' \models \phi$. In the other direction, it's the same thing. 
+
+\item 
+
+	\begin{enumerate}[a)]
+	
+	\item Language: $\{\leq\}$. Theory: $\{\A x x \leq x, \A x, \A y ( x \leq y \land y \leq x \to x = y), \A x\A y\A z x \leq y \land y \leq z \to x \leq z\}$. This is the definition. 
+	
+	\item Language: (so as to avoid confusion, i will use $\cap, \cup$ for join and meet respectively). We have for the theory just the singleton: \[\A a \A b \A c (a \cup b = b \cup a) \land (a \cap b = b \cap a) \land (a \cup (b \cup c) = (a \cup b) \cup c) \land \]\[(a \cap (b \cap c) = (a \cap b) \cap c) \land (a \cup (a \cap b) = a) \land (a \cap (a \cup b) = a)\]
+	
+	\item For boolean algebras, in the language we take in addition to the above for lattices, the constants 1, 0 and complement $\neg$. We add to the theory $a \cup 0 = a, a \cap 1 = a, a \cup \neg a = 1, a \cap \neg a = 0$ and we also add distributivity: $a \cup (b \cap c) = (a \cap b) \cup (a \cap c)$ and $a \cap (b \cup c) = (a \cup b) \cap (a \cup c)$. Actually, only one is needed. 
+	
+	\item An integral domain is a ring without zero divisors. We add to the ring axioms that $\A x \A y (x \cdot y = 0 \to ((x = 0) \lor (y = 0)))$. 
+	
+	\item Trees are acyclic simple graphs. We take the language (and axioms) for simple (irreflexive) graphs and add the scheme of axioms which say there are no cycles of any finite size. In other words, it is not the case that there are n distinct elements forming a cycle. \[\gamma_n = \neg (\E x_1 \ldots \E x_n (\bigwedge_{i \neq j} x_i \neq x_j)  \land (\bigwedge_{i < n} (Ex_ix_{i+1})) \land Ex_1x_n)\] We take, in addition to our simple graph axioms, all of the $\gamma_n$. 
+	
+	\end{enumerate}
+
+%6
+\item For $\phi$ to be a logical consequent of $T$, it means that every model of $T$ is a model of $\phi$. But there are no models of $T$ so this is vacuously true. 
+
+\item 
+
+	 \begin{enumerate} 
+	 
+	  \item We show first that no odd number can be in the spectrum, which follows from the fact that equivalence classes are disjoint and cover the universe, and the existence of such equivalence classes of size 2 would imply that the number of elements in the universe is twice the number of equivalence classes, an even number. No odd number can be in the spectrum. 
+	
+	To show all even numbers are in the spectrum, we can take a model consisting of $n$ disjoint equivalence classes of 2 elements to get $2n$ which is any even number. 
+	
+	\item \emph{these next two are hard. I leave them out for now. I will write a few things quickly. for iii) we can take fields, as finite fields have prime power order. for i) I don't have a complete answer, but I would like to note that if we were looking for just $2^n$ we could take (atomic) boolean algebras, as these are, if finite, isomorphic to the power set of some set. Showing that the finite spectrum of an $\mathcal{L}$-sentence phi is in NEXPtime would require guessing interpretations of the various relation and function symbols and then checking $\phi$, which, as $\phi$ is fixed, would take only polynomial time. The other way seems to be the difficult one.}
+	
+	\item
+	
+	\end{enumerate}
+
+\item Idea: in $\Z$ two numbers either differ by an even number, or one is even and the other is not, where even means, it is the sum of sum number with itself (i.e. twice that number). In $\Z \oplus \Z$ we have $(0, 1), (1, 0)$ which are both not even and their difference is not either. 
+
+We express this as follows: \[\A x\A y (\E z \E w (z = w + w) \land (x = z + y)\]\[ \lor [((\E z (z + z = x)) \land \neg (\E z (z + z = y))]\]\[ \lor [((\E z (z + z = y)) \land \neg (\E z (z + z = x))]\] This is true in $\Z$, but not in $\Z \oplus \Z$
+
+\item (Could be written more clearly)
+	\begin{enumerate}[a)]
+	\item As the graph of $f$ is definable, that means that the vectors in its graph (of $m + n$ elements) are definable. i.e. there is an $L$-formula $\phi(v_1, \ldots, v_{m+n}, w_1, \ldots, w_j)$ and a $\bar{b} \in M^j$ such that $F$, the graph of $f$ is $\{\bar{a} \in M^{n+m} : \mathcal{M} \models \phi(\bar{a}, \bar{b})\}$. 
+	
+	Similarly, there is an $L$-formula $\psi(v_1, \ldots, v_{n+m}, w_1, \ldots, w_k)$ and a $\bar{c} \in M^k$ such that $G$, the graph of $g$ is $\{\bar{a} \in M^{m+l} : \mathcal{M} \models \psi(\bar{a}, \bar{c})\}$.
+	
+	We use the to define the graph of $g \after f$. We ought to present a $\theta(v_1, \ldots, v_{n+l}, w_1, \ldots, w_s)$ and a $\bar{d} \in M^s$ such that its graph is those vectors satisfying $\theta$. Let $s = k + j$ and $\bar{d} = \bar{b}\bar{c}$ and let $\theta = \E x_1 \ldots \E x_m \phi(\bar{v}, \bar{x}, \bar{b}) \land \psi(\bar{v}, \bar{x}, \bar{c})$ (this is correct, modulo some renaming which needs to take place). 
+	
+	\item We do a similar thing where we bound the first $m$ entries with an $\E$. 
+	
+	\item This can be considered a partial function. Its graph is in bijection that of $f$ very closely, save for the fact that the variables appear in a different order. We move them around. 
+	
+	\end{enumerate}
+
+\item I could add more detail/be clearer here. 
+	\begin{enumerate}[a)]
+	\item One direction is trivial, take $n = 0$. In the other direction, the other direction just requires that we add the $\bar{a}$ to the vector input in the definition, and bind the variables. 
+	
+	\item $\sigma$ preserves truth so if we defined a set, it must be closed under $\sigma$, but we know it's a singleton. 
+	
+	\item Well we can see that $dcl(A) \supset A$. So I don't think this is true. If we can ever get $dcl(A) \supsetneq A$, then we will immediately have a contradiction. I think this can be achieved by taking $|M|$ finite and $A$ be $M$ without a single element. It probably means dcl(dcl(A)) = dcl(A)? %flesh this out. Also, why is dcl called that? I guesss definable closure. 
+	
+	\end{enumerate}
+
+%11
+\item Sketch:
+	\begin{enumerate}[a)]
+	\item Similar to above, i.e. closure under $\sigma$, 
+	
+	\item %ommitted for now
+	
+	\item Well, being algebraic over $A$ means you can use a vector in $A$, but the vector is finite. So take the set of $A$'s from the vector. 
+	
+	\item Similarly, anything definable over $A$ is definable over $A$ because an $A$ vector is a $B$ vector. 
+	
+	\end{enumerate}
+\item Sketch: I could do this. The hint tells you you basically want to make a vector with [F:K] entries. The fact that the extension is algebraic lets you define the multiplication table. Addition is pointwise. 
+
+\item % I should bruch up on my 2-adic numbers/integers
+
+\item % I see that you can do these graph constructions, but they look really messy, and I'm not convinced of their usefullness. 
+
+%	\begin{enumerate}[a)]
+%	\item
+%	
+%	\item
+%	
+%	\item
+%	
+%	\end{enumerate}
+\item 
+	\begin{enumerate}[a)]
+	\item We can just use the same definition. This seems fairly self evident. 
+	
+	\item Take the language of graphs and its reduct as a set (in the empty language). Define the singleton elements. If this isn't trivial, it's not definable in the language of sets (any permutation is an automorphism). 
+	
+	\item % This requires some more work
+	
+	\end{enumerate}
+
+\item % I don't have the best grasp of what X/E means
+\item 
+	\begin{enumerate}[a)]
+	\item
+	
+	\item
+	
+	\end{enumerate}
+\item 
+\item 
+
+\end{enumerate}
+
+\end{document}
