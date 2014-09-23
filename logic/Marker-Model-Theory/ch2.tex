@@ -92,19 +92,25 @@ The algebraic closure of \(A\) is the set of all elements of \(M\) which are alg
 Now that we've recalled the definitions, we will state the problem again: 
 \(\mcM \prec \mcN\) and \(A \subseteq M\).
 \begin{enumerate}[a)]
+  % I think I can do better at making this clear
+  \item WTS: The definable (algebraic) closure of \(A\) in \(\mcN\) is equal to the definable (algebraic) closure of \(A\) in \(\mcM\).
 
-\item WTS: The definable (algebraic) closure of \(A\) in \(\mcN\) is equal to the definable (algebraic) closure of \(A\) in \(\mcM\).
+  Lemma (I will state here without proof): The condition that \(\mcM \prec \mcN\) is equivalent to the condition that \(\mcM \equiv \mcN\) where we augment the language with constant symbols for all elements of \(M\). 
 
-Lemma (I will state here without proof): The condition that \(\mcM \prec \mcN\) is equivalent to the condition that \(\mcM \equiv \mcN\) where we augment the language with constant symbols for all elements of \(M\). 
-
-Assume that for some \(b \in M\) we have \(\{b\}\) is \(A\)-definable as above (i.e. \{b\} is in the definable closure of \(A\)). 
+  Assume that for some \(b \in M\) we have \(\{b\}\) is \(A\)-definable as above (i.e. \{b\} is in the definable closure of \(A\)). 
 Then \(\mcM \models \phi(b, \bar{a}) \land \A y (\phi(y, \bar{a}) \to y = b)\) in both \(\mcM\) and \(\mcN\). 
 
-Next, assume that for some \(b \in N\) we have \(\mcN \models \phi(b, \bar{a}) \land \A y (\phi(y, \bar{a}) \to y = b)\)
+  Next, assume that for some \(b \in N\) we have \(\mcN \models \phi(b, \bar{a}) \land \A y (\phi(y, \bar{a}) \to y = b)\)
 
-As \(\mcM \models \phi(b, \bar{a})\) we also have \(\mcM \models \E x \phi(x, \bar{a})\) and as \(\mcM\) and \(\mcN\) are elementarily equivalent (in this augmented language) we must have an element of \(M\) (call it \(b'\)) which satisfies \(\phi(b', \bar{a})\). It must also satisy that in \(\mcN\) and therefore we have \(b' = b\). All the \(A\)-definable elements of \(N\) are therefore in \(M\) and every \(A\)-definable element of \(M\) is also \(A\)-definable as an element of \(N\).
+  As \(\mcN \models \phi(b, \bar{a})\) we also have \(\mcN \models \E x \phi(x, \bar{a})\) and as \(\mcM\) and \(\mcN\) are elementarily equivalent (in this augmented language) we must have an element of \(M\) (call it \(b'\)) which satisfies \(\phi(b', \bar{a})\). 
+  It must also satisy that in \(\mcN\) and therefore we have \(b' = b\). 
+  All the \(A\)-definable elements of \(N\) are therefore in \(M\) and every \(A\)-definable element of \(M\) is also \(A\)-definable as an element of \(N\).
 
+  Similarly, in our extended language we can say that if \(b \in M\) is algebraic over \(A\) then \(\mcM \models \phi(b, \bar{a}) \land \A y (\phi(y, \bar{a}) \to \bigvee y = b_i)\) for some finite set of \(b_i \in M\) and that \(N\) does as well. 
+  If \(b \notin M\), for any finite set of \(b_i \in M\) we have that \(\mcM \models \E x \phi(x, \bar{a}) \land \bigwedge x \neq b_i\) so infinitely many \(b \in M\) satisfy this condition as well (in both \(M\) and \(N\)) and therefore \(b\) cannot be algebraic in \(\mcN\). 
+  In conclusion, if \(b\) is algebraic over \(A\) in \(\mcM\) then it is still algebraic over \(A\) in \(\mcN\) and if it is not in \(M\) it cannot be algebraic over \(A\). 
 
+  \item 
 
 \item
 
