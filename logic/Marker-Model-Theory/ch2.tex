@@ -59,7 +59,7 @@
 
 % Problems to definitely do: 
 % Elementary extension problems: 8*, 9*, 10*, 11, 
-% 17*, 28!, 31, 32, 
+% 17*, 28*, 31, 32, 
 % Hard: 22 (Really gets into filters and ultrafilters)
 
 \begin{enumerate}[1.]
@@ -129,7 +129,7 @@ This implies that \(\mcM_1 \equiv \mcM_2\) as \(\mcL_{\mcM_0}\)-structures as th
 
 \item First, we show that if \(\mcM \models T\) and \(\mcA \subset \mcM\) that \(\mcA \models T_\A\). Consider a universal formula which is in \(T\), it must be true in \(\mcM\). It is of the form \(\A\bar{x}\phi(\bar{x})\) where \(\phi\) is atomic or negation of atomic. Extend our language to include constant symbols for all of \(A\) and interpret them in \(\mcM\) in accordance with the includion map. In particular for any \(\bar{a} \in A^n\) we have \(\phi(\bar{a})\) is true in \(\mcM\) and equivalently, true in \(\mcA\). Therefore, our original universal formula is true in \(\mcA\) as well. 
 
-In the other direction, assume \(\mcA \models T_\A\). We shall construct a model \(\mcM\) which extends \(\mcA\) and models all of \(T\). It would suffice to show that if we extend our language to \(\mcL_\mcA\) that \(\text{Diag}(A) \cup T\) is finitely satisfiable (in the case where \(T\) is satisfiable, as otherwise even \(T_\A\) contains a contradiction and has no models). Consider a finite subset of \(\text{Diag}(A)\). It contains some finite number of added constants (say \{\bar{a}\}). Replace these constants by variables, and prefix the conjunction of the modified formulae from \(\text{Diag}(A)\) by \(\E\bar{x}\). This must be consistent with (any finite subset of) \(T\). Assume not. Then \(T\) has \(\neg\E\bar{x}\bigwedge \phi(\bar{x})\) as a consequence. It would be universal. So \(\mcA\) would model it. But \(\mcA\) also models the universal consequences. Contradiction.   
+In the other direction, assume \(\mcA \models T_\A\). We shall construct a model \(\mcM\) which extends \(\mcA\) and models all of \(T\). It would suffice to show that if we extend our language to \(\mcL_\mcA\) that \(\text{Diag}(A) \cup T\) is finitely satisfiable (in the case where \(T\) is satisfiable, as otherwise even \(T_\A\) contains a contradiction and has no models). Consider a finite subset of \(\text{Diag}(A)\). It contains some finite number of added constants (say \(\bar{a}\)). Replace these constants by variables, and prefix the conjunction of the modified formulae from \(\text{Diag}(A)\) by \(\E\bar{x}\). This must be consistent with (any finite subset of) \(T\). Assume not. Then \(T\) has \(\neg\E\bar{x}\bigwedge \phi(\bar{x})\) as a consequence. It would be universal. So \(\mcA\) would model it. But \(\mcA\) also models the universal consequences. Contradiction.   
 
 %11
 \item
