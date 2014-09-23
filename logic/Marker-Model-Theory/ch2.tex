@@ -134,7 +134,23 @@ Then \(\mcM \models \phi(b, \bar{a}) \land \A y (\phi(y, \bar{a}) \to y = b)\) i
 %16
 \item
  
-\item % do this one = 17
+\item 
+  \begin{enumerate}[a)]
+  \item Begin by letting \(T_{\A\E}\) be the \(\A\E\) sentences which are consequences of \(T\) in the extended language which has constant symbols for all of \(\mcM\). 
+Enumerate all existential formulae and add them one by one to \(T_{\A\E}\) if they are consistent with it. 
+The resulting theory will be satisfiable. 
+We construct a model for it by henkin constructions. We're done. 
+
+  \item Taking the hint, we add a predicate \(P_M\) which corresponds to being in \(M\) in addition to constant symbols for all of \(M\). 
+Our extension \(\mcN\) violating the exestentially closed condition models that there doesn't exist a vector in \(M\) satisfying the existential formula but one does exist. We than add \(\kappa\) many constant symbols and stipulate that no two are equal to each other and that all are in \(M\) in addition to all of the things in \(T\) remaining true, even when limited to things in just \(M\), and that something exists satisfying the existential formula even though nothing in \(M\) does. 
+This is finitely satisfiable so it is satisfiable. We get a model. It has at least \(\kappa\) many \(M\) things. 
+When limited to \(M\) it is still a model of \(T\) but no longer satisfies the existential i.e. it can be extended to satisfy an existential meaning it isn't existentially closed.   
+
+  \item By the above two results, if we have a non-existentially closed model,  so long as we let \(\kappa'\) be large enough, we can show there are both existentially closed and non-existentially closed models of that size. These two models are not elementarily equivalent and cannot be isomorphic. Contradiction. 
+
+ACF is axiomatized by \(\A\E\) sentences (this follows easily from the definitions of ACF) and uncountably categorical (prop 2.2.5). Therefore, the conclusion follows. 
+
+  \end{enumerate}
  
 \item
  
