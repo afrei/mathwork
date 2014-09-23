@@ -58,7 +58,7 @@
 \maketitle
 
 % Problems to definitely do: 
-% Elementary extension problems: 8*, 9!, 10!, 11, 
+% Elementary extension problems: 8*, 9*, 10*, 11, 
 % 17*, 28!, 31, 32, 
 % Hard: 22 (Really gets into filters and ultrafilters)
 
@@ -187,11 +187,30 @@ ACF is axiomatized by \(\A\E\) sentences (this follows easily from the definitio
  
 \item
   \begin{enumerate}[a)]
-    \item
+
+    \item Note that exactly one of the following three \(\mcL_{\omega_1, \omega}\)-sentence must be true in any model of \(T_3\): 
+    \(\A x \bigvee x \leq c_i \iff \neg\E x \text{ub}(x)\) or
+    \(\E x \text{ub}(x) \land \A y \text{ub}(y) \to \neg(y \leq x)\) or
+    \(\E x \text{ub}(x) \land \A x \text{ub}(x) \to \E y y < x \land \text{ub}(y)\)
+
+    We then play the EF game to show \(\mcL_{\infty, \omega}\) equivalence. Match all the \(c_i\) up first. If applicable, match up the LUBs.
+    We then have DLOs without endpoints between each of the elements matched up above and we know the EF-game strategy to play there.   
     
     \item
+      \begin{enumerate}[i)]
+        \item One direction is rather trivial (if \(\mcL' \subseteq \mcL\) then every \(\mcL'\)-sentence is also an \(\mcL\)-sentence). So given agreement on sentences of \(\mcL\), we get agreement on sentences from the finite sublanguage for free.
 
-    \item
+The other direction: to show \(\mcM\) and \(\mcN\) agree on any \(\mcL\) sentence \(\phi\), take the language consisting of only the finitely many symbols appearing in \(\phi\). 
+
+        \item We prove instead that (\(\mcL, T\) as above) if \(T\) isn't complete than it must have two countable models disagreeing on some formula \(\phi\). \(T\) not being complete means that for some \(\phi\) both it and its negation are consistent with \(T\). Both \(T \cup \{\phi\}\) and \(T \cup \{\neg \phi\}\) have infinite models. LS gives us that they both have countable models. But these must disagree on \(\phi\). 
+
+      \end{enumerate}
+
+   Any two structures of \(T_3\) are elementarily equivalent for every finite sublanguage (easy EF strategy begins with matching the constant symbols). Moreover, no finite models exist (bc of the infinitely many \(c_i\)). So \(T_3\) is complete. 
+
+    \item I think we also require something like \(P(c_i)\) for all of the constants. It is clear that we can additionally distinguish between the case where the LUB exists and is \(P\) and the case where it exists and is not \(P\). Otherwise, we can play the EF game with a similar strategy as mentioned above. 
+
+    \item We will have some number of predicates \(P_1, \ldots, P_n\). Additionally, we will add that all constants are \(P_i\) for all \(i\). And that \(\A x P_i(x) \to P_j(x)\) if \(i > j\). Define the goodness of an LUB to be the last \(i\) such that it (the LUB) is \(P_i\). If no such \(P_i\) exists, we call it \(0\)-good.  In general, we have \(n+3\) countable models up to isomorphism, and they are the case where the constants are unbounded, where they are bounded without an LUB and the \(1+n\) cases where the LUB is either \(0, 1, \ldots \text{or} n\)-good. 
 
   \end{enumerate}
 
