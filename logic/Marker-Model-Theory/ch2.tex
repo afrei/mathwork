@@ -220,9 +220,17 @@ The other direction: to show \(\mcM\) and \(\mcN\) agree on any \(\mcL\) sentenc
 \item
 
 %31
-\item
+\item For any \(n \in \N\) we have the FO sentence \(\gamma_n\) which says there exist \(n\) distinct elements of the universe (i.e. the size of the universe is at least \(n\)). 
+
+Additionally, we have the FO sentence \(\delta_n = \gamma_n \land \neg \gamma_{n+1}\) asserting that the size of the universe is exactly \(n\). 
+
+In \(\mcL_{\omega_1, \omega}\) we have the following finitely satisfiable set of sentences: \(\{\bigvee_\N \delta_n, \gamma_1, \gamma_2, \ldots\}\).
+
+The first of which asserts the size of the universe is finite. To satisfy a finite subset it suffices to fine the largest \(\gamma_n\) and take the model of size \(n\) (this will also make the disjunction of \(\delta_i\)s true). 
+
+The conjunction asserts that the model is of finite suze but also has size bigger than any finite size. Contradiction.    
  
-\item
+\item I'm relying here on knowledge from taking finite model theory (libkin's book). Two structures are \(\equiv_{\infty, \omega\}\) iff the duplicator has a winning strategy in the infinite EF game i.e. there is a set of partial isomorphisms. By taking all subsets of the isomorphism garuanteed by \(\mcM \isom \mcN\), we get partial isomorphisms (by definition? it should be clear). The result is proven.
  
 \item
  
