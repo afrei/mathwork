@@ -65,7 +65,8 @@
 	\begin{enumerate}[a)] 
 	\item I'm interpreting ``Boolean combination of $\phi_i$s'' to mean a member of the smallest set of formulae including all of the $\phi_i$s and closed under negation, conjuction and disjunction. This question, then asks to show that boolean combinations admit this ``normal form''. I will show this as follows: first, I will show there is a $\psi$ of this form such that $\models \phi_i \iff \psi$ and second, that if $\phi', \psi'$ admit this normal form, then so do $\phi' \land \psi', \neg \phi', \phi' \lor \psi'$. That there is a $\psi$ of this form such that $\models \phi_i \iff \psi$ follows from taking $S = \{x \in \mathbb{P}(\{1, \ldots, n\}) | x \ni i\}$. That formulae admiting this normal form are closed under $\lor$ follows by merely taking the union of the two sets $S$, and closure under $\land$ follows by taking the intersection. Negation follows by taking the complement. 
 	
-	\item Note that every atomic formula is trivially of this form. We show by induction on formula length that every formula is equivalent to one of this form. (Note that we will define formula length to be as follows $\E x \phi, \A x \phi, \neg \phi$ all have length one more than $\phi$s length and $\phi \land \psi, \phi \lor \psi$ have lengths one more than the sums of the lengths of $\phi, \psi$ and atomic formulae are of length 0). We are left to deal with 5 cases. Negations are easy (flip the quantifiers and negate $\psi$). As are the quantifier cases. I will show the case of $\phi \land \phi'$ and the $\lor$ case is very simialar. $(Q_1v_1\ldots Q_mv_m \psi ) \land ( Q'_1v_1\ldots Q'_nv_n \psi')$ is clearly equivalent to\[Q_1v_1\ldots Q_mv_mQ'_{1}v_{m+1}\ldots Q'_{n}v_{m+n} \left(\psi \land [v_{m+1}/v_1]\cdots[v_{m+n}/v_n]\psi'\right)\] where $[v_{m+1}/v_1]$ is inductively defined substitution of $v_{m+1}$ for $v_1$. 
+	\item Note that this class clearly contains all qf formulae, is closed under quantification and negation (flip some quantifiers). It would suffice to show that it is closed under conjunction (or disjunction). I claim that we (assume wlog the fvs don't overlap) can ``cut and paste'', i.e. if we have \(Q_i v_i \phi \land Q_j v_j \phi'\) it is equivalent to \(Q_i v_i Q_j v_j \phi \land \phi'\). If we view this in terms of turn based games, it becomes clear that this ``new'' game corresponds to playing them in sequence. Trying to formalize this a bit more might be worthwhile. 
+
 	\end{enumerate}
 
 \item  
@@ -156,7 +157,7 @@ We express this as follows: \[\A x\A y (\E z \E w (z = w + w) \land (x = z + y)\
 	\end{enumerate}
 \item Sketch: I could do this. The hint tells you you basically want to make a vector with [F:K] entries. The fact that the extension is algebraic lets you define the multiplication table. Addition is pointwise. 
 
-\item % I should bruch up on my 2-adic numbers/integers
+\item % I should brush up on my 2-adic numbers/integers
 
 \item % I see that you can do these graph constructions, but they look really messy, and I'm not convinced of their usefullness. 
 
