@@ -72,23 +72,25 @@
   \item 	
   \end{enumerate}
 
+% do this one
 \item
  
   \begin{enumerate}[a)] 
-  \item 	
+  \item Assume I proved it has qf. Consider all formula in one free variable \(x\) with parameters in \(A\). It is equivalent to a qf one (asserting that \(x\) is successor/predecessor of some elements of \(A\) or isn't). Add those successors/predecessors as constant symbols. Now the formula is in the pure language of equality! 
+
+Every reachable element from \(A\) is clearly definable. Otherwise, we will show that anything true of that element must be true of every element in that \(\Z\)-chain. Any translation of that \(\Z\)-chain is an automorphism. This suffices. 
+ 
+  \item Consider \(\phi(x) = (\E y) s(y) = x\). This defines all non-zero elements of \(\N\). On the other hand, consider all qf formulae in one free variable. It is a boolean combination of atomic formulae which look like \(s^n(x) = s^m(x)\) or \(\neg s^n(x) = s^m(x)\). Both take on definite truth values, as will the whole formula. But \(\phi\) is true for some values of \(\N\) but not all. 
+
   \end{enumerate}
 
-\item
- 
-  \begin{enumerate}[a)] 
-  \item 	
-  \end{enumerate}
+% and this one
+\item By corrolarry 3.1.6 (Take \(\mcA\) to be the natural numbers). Models of this theory have the form of an initial \(\N\) chain followed by some cardinality of \(\Z\) chains (if that cardinality is the same any permutation of them or translation is an automorphism). No \(\phi\) can distinguish between non-natural elements. Additionally, \(\phi\) is true of non-natural elements only if it true of arbitrarily large successors of zero. If the \(b\) is infinite, take an arbitrarily high element. If not, take the same element from \(\N\). 
 
+We get a boolean combination of intervals over \(N\), which has to be finite. But if we have an infinite element, \(c\) we can let \(\phi(x) = x < a\) which is infinite and coinfinite. 
+
+% and this one
 \item
- 
-  \begin{enumerate}[a)] 
-  \item 	
-  \end{enumerate}
 
 %6
 \item
