@@ -1,0 +1,77 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\topmargin -1.5cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm 
+\parskip 0pt            % sets spacing between paragraphs
+\parindent 0pt		     % sets leading space for paragraphs
+\usepackage{mathtools}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}
+ { #1 \,\delimsize|\, #2 }
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\newcommand{\after}{\circ } 
+\newcommand{\la}{\langle } 
+\newcommand{\ra}{\rangle } 
+\newcommand{\ti}{\to \infty} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\A}{\forall}
+\newcommand{\mcC}{\mathcal{C}} 
+\newcommand{\satisfies}{\models} 
+\newcommand{\Mod}{\text{Mod}} 
+\newcommand{\inn}{\varepsilon}
+\newcommand{\ninn}{\not\varepsilon}
+\newcommand{\E}{\exists}
+\newcommand{\mfC}{\mathfrak{C}}
+\newcommand{\mfG}{\mathfrak{G}}
+\newcommand{\mfN}{\mathfrak{N}}
+\newcommand{\mfR}{\mathfrak{R}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\Id}{\text{Id}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\s}{\sqrt}
+\newcommand{\half}{\frac{1}{2}}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,automata}
+\newtheorem{lem}{Lemma}
+\author{Adam Freilich}
+\begin{document}
+
+We have $n$ tasks, each task $t_i$ has, associated with it 3 values, \(r_i, w_i, l_i\) the time it is released, the weight/priority assigned to it and the length of time it takes to complete. 
+
+Once a task is started, one can switch to another task and pick it back up where it was left off at a later time. 
+
+We would like to minimize the following cost: \(\sum_i w_i(c_i - r_i)\) where \(c_i\) is the time at which \(t_i\) was completed. 
+
+Let's talk about a greedyish approach, which seems natural. At some time \(t\), making the ``effective'' choice is working on the live task for which \(\frac{w_i}{(l_i - p_i)}\) is greatest. The denominator is time remaining, \(p_i\) is the progress already made. The approach we will discuss is to always make the effective choice. Note that working on a task causes the quantity in question to increase, so what task one works on would only change once a task is completed or a new task goes live. 
+
+I will show two things:
+
+\textbf{Claim 0.} In any optimal strategy we will always be working on the live task with the earliest finish time. 
+
+Assume, at time \(s\),  you're working on live task \(t_j\) finish at \(c_j\) which is after the completion time of \(t_i\) which is \(c_i\) (\(c_i < c_j\)). You're working on \(t_j\) during \((s, s + \epsilon)\) and on \(t_i\) from \((c_i - \epsilon, c_i)\). Switch them. Everything is the same, except that \(t_i\) finishes an epsilon earlier. 
+
+It suffices, then, to look at the order of the finishing times. 
+
+\textbf{Claim 1.} In the case where all release times are the same (WLOG 0), this ``effective choice'' strategy is optimal. 
+
+Find two adjacent tasks not ordered by their ``effective weight''. Switch them. This improves our standing. 
+
+\textbf{Claim 2.} I claim this ``effective choice'' strategy is optimal in general.
+
+%work on this
+
+
+\end{document}
