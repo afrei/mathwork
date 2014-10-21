@@ -66,22 +66,37 @@
 
 \begin{enumerate}[1.]
 %1
-\item
+\item Add constants \(c, \epsilon, 0\) to our language. \(c\) will be some fixed number greater than 0 and \(\epsilon\) will be infinitesmal.
+
+We assert \(\A x (x + 0 = 0 + x = x)\) and that \(c > 0\) and that \(\epsilon > 0\) and the countably many formulae \(n \cdot \epsilon < c\) where \(n \cdot \epsilon\) can be denoted in the language by writing \(\epsilon + \ldots + \epsilon\) with \(n\) '\(\epsilon\)'s. 
+
+This is finitely satisfiable (take \(c = 1, \epsilon = \frac{1}{n+1}\) where \(n\) is the index of the highest condition we impose on \(\epsilon\). So this is satisfiable. And \(\epsilon, c\) are both greater than 0 but \(c > m\epsilon\) for all natural \(m\).   
+
  
-\item
+\item Consider the infinite set of formulae \(\Gamma = \{\E x_1 \ldots \E x_n \bigwedge_{i \neq j}x_i \neq x_j\}_{n \in \N}\). \(T \cup \Gamma\) is finitely satisfiable (for the highest \(n\) appearing, take the model bigger than \(n\)) so it is satisfiable and a model of \(T \cup \Gamma\) has infinitely many elements by construction. 
  
-\item
+\item Take the language \(\mcL_\Q\) which has constant symbols for all rational numbers. Let \(\Gamma = \eldiag{Q}\). I claim \(T \cup \eldiag(\Q)\) is finitely satisfiable. As finitely many constants appear in any finite subset (call the number appearing \(n\)), and we can find a model of \(T\) containing at least \(n\) distinct elements. Interpret these \(n\) constant symbols as these \(n\) elements of the model of \(T\) respecting their order in \(\Q\). (Interpret all other constant symbols in some arbitrary way). A model of \(\Gamma \cup T\) exists. It models \(T\) as desired and as it models \(\eldiag(\Q)\), we can embed \(\Q\) into it.  
  
-\item
+% get back to this one
+\item 
  
-\item
+\item 
+\begin{enumerate}[a)]
+  \item Let the axioms assert that \(E\) is an equivalence relation \(\A x \A y xEy \to yEx, \A x \A y \A z xEy \land yEz \to xEz, \A x xEx\). Additionally, assert \(\E x_1 \ldots \E x_n \bigwedge_{i < j} \neg x_i E x_j\), which means there are at least \(n\) equivalence classes for all \(n\) and additionally assert that \(\A y_1 \E y_2 \E y_3 \ldots \E y_{n-1} \E y_n \bigwedge_{i < j} y_i \neq y_j \land y_i E y_j\) asserting that every equivalence class is infinite. 
+
+  % Look up cardinal deal
+  \item There is a single countable model, \(2^{\aleph_0} + 2^{\aleph_1}\) models of size \(\aleph_1\) (which I beleive is just \(2^{\aleph_1}\)). As there are either \(\aleph_0\) many or \(\aleph_1\) many equivalence classes and each can be of either size (with the one excpetion being countably many countable classes). I think this will generalize to there being \(2^\kappa\) models of size \(\kappa\) for uncountable \(\kappa\), but I should brush up on my cardinals.  
+ 
+  \item \(T\) is complete as it is categorical for \(\aleph_0\) (Vaught's test).
+\end{enumerate}
 
 %6
-\item
+\item This is kind of a soft questions, so identifying what answers are sufficient is hard. At first glance, we might say a set \(x\) being is a property like any other, we just mean \(U(x)\) where \(U\) is a predicate like any other. So we satisfy the same axioms and \(U\) doesn't \textit{really} mean uncountable. Alternatively, maybe being uncountable is about the non-existence of certain functions (bijections between sets) where functions are represented by their graph.  Note that when we go down to this smaller model, we lose most sets. Perhaps many of them were these bijections. By losing the functions between them, we end up making two elements which ``used to be equinumerous'' no longer so. 
  
-\item
- 
-\item % Do this one = 8
+%This is hard, get back to it
+\item %Consider the theory \(\eldiag(\mcM) \cup \{\E x (x > n \land \phi(x, \bar{a})\}_n\). It is clearly finitely satisfiable (interpret \(c\) as a sufficiently large finite element of \(\mcM\)). It is satisfiable (say by \(\mcN\)) and \(\mcN \models \eldiag(\mcM)\) so \(\mcM \prec \mcN\). 
+
+\item 
 Recall the definition of algebraic and definable closures:
 
 Let \(\mcM\) be an \(\mcL\)-structure and \(A \subseteq M\). 
@@ -136,17 +151,20 @@ In the other direction, assume \(\mcA \models T_\A\). We shall construct a model
 %11
 \item It suffices to show that, as an \(\mcL_{M_1\cup M_2}\)-theory, \(\eldiag(\mcM_1) \cup \eldiag(\mcM_2)\) is satisfiable. As we have constant symbols for all elements of \(M_i\), we get easy embeddings, and as any element of \(M_0\) will go to the value its constant takes in \(M_i\) which will then be mapped to the value that selfsame constant takes in \(\mcN\), the maps agree. 
 
-It suffices to show that \(\phi(\bar{m}) \land \psi(\bar{n})\) is satisfiable for \(\phi(\bar{m}) \in \eldiag(\mcM_1), \psi(\bar{n}) \in \eldiag(\mcM_2)\). It suffices to note that \(\E \bar{x} \hi(\bar{x}),  \E \bar{y} \land \phi(\bar{y})\) are \(\mcL_\mcM\}-sentences which are true in \(\mcM_1, \mcM_2\) respectively and therefore in \(\mcM_0\) and so is their conjunction. Interpreting the constants as the elements which exist in \(\mcM\) suffices to show this is finitely satisfiable.  
+It suffices to show that \(\phi(\bar{m}) \land \psi(\bar{n})\) is satisfiable for \(\phi(\bar{m}) \in \eldiag(\mcM_1), \psi(\bar{n}) \in \eldiag(\mcM_2)\). It suffices to note that \(\E \bar{x} \phi(\bar{x}),  \E \bar{y} \land \phi(\bar{y})\) are \(\mcL_\mcM\)-sentences which are true in \(\mcM_1, \mcM_2\) respectively and therefore in \(\mcM_0\) and so is their conjunction. Interpreting the constants as the elements which exist in \(\mcM\) suffices to show this is finitely satisfiable.  
 
+% Get back
 \item
  
-\item
+\item This is categorical for all uncountable cardinals. This is the theory of \((\Z, s)\). We have some number of \(\Z\)-chains and that number determines our model up to isomorphism. If \(\kappa\) is uncountable, that number is \(\kappa\) in the countable case, we could have any finite number of or countably many chains. 
  
-\item
+\item It suffices to determine the number of generators, which is always \(\kappa\). So this theory is always categorical. We need to assert that there are infinitely many elements for vaught's test to apply. Otherwise, we don't know wether the formula asserting ``there are exactly \(n\) elements'' is true. 
  
-\item
+%Maybe Later
+\item 
 
 %16
+%maybe Later
 \item
  
 \item 
@@ -234,7 +252,7 @@ The first of which asserts the size of the universe is finite. To satisfy a fini
 
 The conjunction asserts that the model is of finite suze but also has size bigger than any finite size. Contradiction.    
  
-\item I'm relying here on knowledge from taking finite model theory (libkin's book). Two structures are \(\equiv_{\infty, \omega\}\) iff the duplicator has a winning strategy in the infinite EF game i.e. there is a set of partial isomorphisms. By taking all subsets of the isomorphism garuanteed by \(\mcM \isom \mcN\), we get partial isomorphisms (by definition? it should be clear). The result is proven.
+\item I'm relying here on knowledge from taking finite model theory (libkin's book). Two structures are \(\equiv_{\infty, \omega}\) iff the duplicator has a winning strategy in the infinite EF game i.e. there is a set of partial isomorphisms. By taking all subsets of the isomorphism garuanteed by \(\mcM \isom \mcN\), we get partial isomorphisms (by definition? it should be clear). The result is proven.
  
 \item
  
