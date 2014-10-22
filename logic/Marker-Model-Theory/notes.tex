@@ -60,7 +60,32 @@
 \section{Chapter 1}
 \section{Chapter 2}
 \section{Chapter 3}
+Ways to show \(T\) admits quantifier elimination (i.e. sufficient conditions):
 
+\begin{itemize}
+\item Directly (but hopefully not)
+\item Show that \textbf{if} \(\phi\) is \qf and \(\mcM, \mcN \models T \text{ and } \mcM, \mcN \supset \mcA \text{ and } \bar{a} \in \mcA^n\) 
+
+then \(\mcM \models \exists x \phi(\bar{a}, x) \iff \mcN \models \exists x \phi(\bar{a}, x\))
+
+(The proof relies on two facts: to show \qe it suffices to show for existentials of depth 1 and that a formula being \qf is equivalent to this substructure definition)
+
+\item Show that \(T\) has algebraically prime models and that if \(\mcM, \mcN \models T, \mcM \subset \mcN\) that \(\mcM \prec_s \mcN\) (all substructures are simply closed in their extensions).
+
+Where \(T\) has algebraically prime models when any model \(\mcM \models T_\A\) can be embedded in a \(\mcN \models T\) which embeds in any other such extension of \(\mcM\). 
+
+And where \(\mcM \prec_s \mcN\) when, for any \(\phi = \E x \psi(\bar{a}, x)\) for \(\psi\) \qf, then \(\mcM \models \phi \iff \mcN \models \phi\) (the extension makes no more quantifier depth 1 existential formulae true).
+
+\end{itemize}
+
+Now for some necessary conditions: 
+\begin{itemize}
+
+\item I beleive the second condition above is equivalent (more or less that existentials admit \qe)
+
+\item Model completeness: All embeddings are elementary. 
+
+\end{itemize}
 
 
 \end{document}
