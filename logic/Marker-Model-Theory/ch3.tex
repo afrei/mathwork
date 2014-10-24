@@ -10,12 +10,19 @@
 \item
  
   \begin{enumerate}[a)] 
-  \item 
+    \item I claim \(T_\A\) states that no class is of size 3 (in addition to standard equivalence relation stuff). Simply for any three elements, if they're all in the same class, some pair must be equal. This can be extended to a model of \(T\). This also admits alg. prime models. Simply extend all singleton classes with a single element and add countably many classes if there are only finitely many. Additionally, All substructures are simply closed in their extensions. A \qf formula either says that some element is in the same equiv class as a familiar element, or it's in another class, which must exist as there are infinitely many. 
+
+    \item Here, \(T_\A\) is just the familiar equiv reln axioms. We still admit alg prime models in a very similar way. And substructures are simply closed similarly to above. 
+
+    \item This cannot admit \qe as if we have a structure with \(a, b\) forming one of the classes of size 2, we can embedd this model in one where \(\E c (c \neq a, b) \land c E a\) so the extension will not be elementary and the theory isn't model complete. Adding a predicate for being in an equiv class of size 2 would take care of it. 
+
+    \item Similar problem to above (same example works with slight tweaks). Add predicates \(P_n\) for being in an equivalence class of size exactly \(n\). 
+
+ 
   \end{enumerate}
 
 \item Assume the language contains both \(+, -\) (otherwise, I think we get torsion free commutative monoids). Being a group and being torsion free are universal properties. It suffices to show that all torsion free abelian groups can be extended to models of \(DAG\). Imitate the construction in lemma 3.1.16.  	
 
-% do this one
 \item
  
   \begin{enumerate}[a)] 
@@ -31,5 +38,11 @@ Every reachable element from \(A\) is clearly definable. Otherwise, we will show
 \item By corrolarry 3.1.6 (Take \(\mcA\) to be the natural numbers). Models of this theory have the form of an initial \(\N\) chain followed by some cardinality of \(\Z\) chains (if that cardinality is the same any permutation of them or translation is an automorphism). No \(\phi\) can distinguish between non-natural elements. Additionally, \(\phi\) is true of non-natural elements only if it true of arbitrarily large successors of zero. If the \(b\) is infinite, take an arbitrarily high element. If not, take the same element from \(\N\). 
 
 We get a boolean combination of intervals over \(N\), which has to be finite. But if we have an infinite element, \(c\) we can let \(\phi(x) = x < a\) which is infinite and coinfinite. 
+
+\item It suffices to show that a) everything in the \(\Q\)-v.sp. span is in the definable close (and therefore in the algebraic closure) and that b) nothing outside that span can be in the algebraic closure. 
+
+a) follows from letting \(\phi(x) := x = \sum q_i v_i\).
+
+b) follows from producing enough automorphisms of our model. If we fix a basis of the span of \(A\) and add some arbitrary other \(v\) which will go to infinitely many things and complete the set to a basis, merely scale \(v\) by every non-zero rational. This will induce an automorphism. And \(v\) will have infinitely many images. 
 
 \end{enumerate}
