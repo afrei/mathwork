@@ -1,0 +1,149 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\topmargin -1.5cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm 
+\parskip 0pt            % sets spacing between paragraphs
+\parindent 0pt		     % sets leading space for paragraphs
+\usepackage{mathtools}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}
+ { #1 \,\delimsize|\, #2 }
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\newcommand{\after}{\circ } 
+\newcommand{\la}{\langle } 
+\newcommand{\ra}{\rangle } 
+\newcommand{\ti}{\to \infty} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\A}{\forall}
+\newcommand{\mcC}{\mathcal{C}} 
+\newcommand{\satisfies}{\models} 
+\newcommand{\Mod}{\text{Mod}} 
+\newcommand{\inn}{\varepsilon}
+\newcommand{\ninn}{\not\varepsilon}
+\newcommand{\E}{\exists}
+\newcommand{\mfC}{\mathfrak{C}}
+\newcommand{\mfG}{\mathfrak{G}}
+\newcommand{\mfN}{\mathfrak{N}}
+\newcommand{\mfR}{\mathfrak{R}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\Id}{\text{Id}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\s}{\sqrt}
+\newcommand{\half}{\frac{1}{2}}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,automata}
+\newtheorem{lem}{Lemma}
+\author{Adam Freilich}
+
+\begin{document}
+
+\section{September 8th, 2015}
+
+\subsection{Mostly Administrative Stuff and Logistics}
+cache
+
+ram
+
+cpu with registers
+
+c programming
+
+http://www.cs.columbia.edu/~nieh/teaching/w4118/
+
+Discussion Board (piazza)
+
+Only Git Push is Git Push (test with git clone)
+
+\section{September 10th, 2015}
+
+%-------------------------------------------------------------------------------
+
+Note: there is an instruction on Piazza for group preferences. 
+
+
+\subsection{What is an OS?}
+\subsubsection{Examples:} Ubuntu, Windows 10, Mac OS, Watch OS, Android, iOS9, Linux, Unix, Chrome OS, OS/2, TAILS?, Backtrack, Solaris, Print OS, Moltics, VMS, HPUX, Windows XP, DOS, etc etc
+
+Moltics: Wanted to provide computer utilities and moltics built on top of that. Very complicated. Ken Thompson from bell labs. A relatively small digital computer pdp8. Wanted to play video games so built a stripped down version became unix. AT\&T couldn't use UNIX so it became free. Different unix families incl solaris and HPUX, MACH and BSD which made thier way into mac OS which is connected to iOS (all a little related). AT\&T got back into the OS game because no longer monopoly. Whole thing. New OS released under GNU public Library called linux which was freely available. Spawned off a bunch of stuff incl. androi ubuntu and redhat. 
+ 
+In the windows world it was bill gates and DOS and windows 3 etc. 
+
+\subsubsection{Constructive definition}
+``Structural'':OS is layer of software between hardware and applications. 
+
+How much of that is actually the OS? Is the GUI? (In traditional unix env. it hasn't been. It's been outside like XWindows. On Windows like windows NT, it was originally seperate but then sucked in bc it was too slow.)
+
+Is the web browser part of the OS? There is a legal case from netscape against microsoft because they shipped IE with the OS. US DOJ files anti-trust thing. It was anti-competetive. MS says IE is part of the OS. Can they be taken apart?
+
+``OS Kernel'': Kernel is a subset on the lower end of that OS with full control over the hardware. Part of it's job is to manage that hardware for everyone. That could be the OS, everything else is ``OS environment'' shipped with the ``Distribution''. We will mostly deal with the kernel. (Maybe kernel is real OS and everything else is just apps). 
+
+Not Structural but we can define in terms of services it provides. Software abstractions like running programs, opening file, allocating memory. Provides an illusion of concurrency (even though other things are running and sharing CPU(s)). Bluetooth protocols you don't care about. Drivers are provided. Memory Management.  
+
+\subsection{OS Services}
+System call interface. A library. A bunch of functions provided by the OS to apps to use to do various things. App talks to OS via syscall interface. 
+
+Basic Abstractions: ``Process'' and ``file''. Files are persistently stored on disk. One can ``read'' and ``write'' files. Read and write are system calls provided by os for manipulating files.  How do you say where a file is? It is specified by a path with slashes etc. /user/foo/filename. don't need to specify every time. Need to find it every time? Instead we do some basic setup first and then some teardown. Sets up with command ``open'', another system call. In response, you are given a handle (normally called a ``file descriptor'') which is really just a number which is an index to a table of open files. read and write with it (the fd). then ``close'' which tears down the state. Also fopen fread fwrite fclose (which is more portable) but the actual open, read, write and closed are below. 
+
+Applications don't use system calls directly but uses a c library which wraps things nicely which then use system call. We get to system calls eventually. 
+
+We will call them directly and not use C libraries. (Performance can be a bit faster going directly). Are system calls generic or OS specific? They are specific, but there are some standards (posix). (You can make system calls from other languages but we're just going to do it in C). 
+
+``Process'': Definition: ``Program in execution''. When you run a program it's a process. Keeps track of what's running. Keeps track with processes. Some system calls allow you to deal with processes: to create a process - (with name and memory etc.) ``create'', but because it's a pain you don't do that. ``fork'' is used and does it differently. Let ``A'' be a running process. Say you're in a shell and you want to run chrome. (So ``A'' is the shell). Shell calls ``fork'' which says, make a copy of me and run it. Don't need to specify much. ``A'' is the parent and the thing being forked (``B'', chrome) is the child. But that's just another shell! So we make it into chrome. The other style of command is ``exec'' (``fork'' ``exec'' is a common paradigm). ``exec chrome'' essentially. ``exec'' says forgett what I was doing, do this. 
+
+Some pseudo-code: (errors?)
+
+\begin{verbatim}
+main()
+{
+%       fork():
+        fork();
+        printf("hi\n");
+%if we try exec here: we get 2(4) of the new process and no shell!
+}
+\end{verbatim}
+
+
+a.out makes 1 which makes procces 2 an exact copy. one for each process.
+
+What if we write two forks? both copies call fork. So 4 ``hi''s get printed. 
+Key thing about processes is that they're ``completely independent''. 
+
+So how do we get just 1 shell and 1 chrome?
+fork has a return value which is very important. 
+
+\begin{verbatim}
+i = fork();
+\end{verbatim}
+
+if 0, it's the child. If less than 0, it's an error and if >0 it's the parent and i is the child's pid. (Procces id).
+
+\begin{verbatim}
+main()
+{
+        pid = fork();
+        if (pid == 0) {
+                exec("chrome");
+        }
+}
+\end{verbatim}
+
+now we have one of each. Each call of fork is its own (like, the shell is a child but it doesn't matter). 
+
+% Other system calls allow a child to know what it's parent is. To get something's own pid, we have getpid.
+
+This was an introduction to system calls. 
+
+\end{document}

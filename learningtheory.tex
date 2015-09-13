@@ -1,0 +1,199 @@
+\documentclass[10pt]{article}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\topmargin -1.5cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm 
+\parskip 0pt            % sets spacing between paragraphs
+\parindent 0pt		     % sets leading space for paragraphs
+\usepackage{mathtools}
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}
+ { #1 \,\delimsize|\, #2 }
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\newcommand{\after}{\circ } 
+\newcommand{\la}{\langle } 
+\newcommand{\ra}{\rangle } 
+\newcommand{\ti}{\to \infty} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\A}{\forall}
+\newcommand{\mcC}{\mathcal{C}} 
+\newcommand{\satisfies}{\models} 
+\newcommand{\Mod}{\text{Mod}} 
+\newcommand{\inn}{\varepsilon}
+\newcommand{\ninn}{\not\varepsilon}
+\newcommand{\E}{\exists}
+\newcommand{\mfC}{\mathfrak{C}}
+\newcommand{\mfG}{\mathfrak{G}}
+\newcommand{\mfN}{\mathfrak{N}}
+\newcommand{\mfR}{\mathfrak{R}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\Id}{\text{Id}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\s}{\sqrt}
+\newcommand{\half}{\frac{1}{2}}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,automata}
+\newtheorem{lem}{Lemma}
+\author{Adam Freilich}
+\title{Learning Theory (COMS 4252)}
+\begin{document}
+%\maketitle
+Computational Learning Theory (CLT)
+
+\section{September 8th:}
+
+\subsection{What we did last time:} Nothing
+
+\subsection{Today:} Overview of CLT, administrative stuff, Another more detailed overview, Basic notions and notations, First Learning model (online/mistake bound)
+
+\subsection{overview of CLT} CLT is Machine Learning from a CS theory perspective.
+
+ML: developing programs that improve themselves given exposure to data. ``The machine derives the program''
+
+Examples: Classification/Clustering; Prediction (Stock Market); Really Complicated Software (too many cases to code, self driving cars, chess AI)
+
+CS Theory (TCS): Well defined models, Definition/thm/proof oriented, no doubt what you're talking about, have to do with algorithms and lower bounds for well defined problems
+
+CLT intersects many other subfields of CS (Complexity, Algorithms, Crypto, Stats, Info. theory, ML)
+
+\textbf{Readings for next time: Blum Survey on Online Learning, if you want}
+
+\subsection{More detailed overview/Perspective on CLT:}
+
+learning models \(\approx\) rules of a game
+
+1) Develop/define is setting up the rules \((1\%)\)
+
+2) proving results about and understanding the model is playing the game/mastering the game \((99\%)\)
+
+A learning models specifies what is being learned. In this class: Binary Classification Rules (Boolean Functions \(f: X \to 1\)). Sometimes called ``concept learning''. (Learn the concept of elephant)
+
+(Also specifies) Where does the information come from/how is it obtained? Learner is given labeled examples \((x, f(x))\). (Helpful, random, adversarial); Learner can make queries (``hey, is that an elefant?''); Membership (is that an elephant), subset (is everything with a trunk an elefant?), equivalence (is an elephant a large grey animal with a trunk)
+
+(Specify) Is info perfect, incomplete, noisy?
+
+Prior knowledge? Assume generally known class of possible concepts, trying to learn one of them, but we don't know which one. 
+
+Constraints on the learner? The learner is an efficient computer program. Has only polynomial resources (time, information)
+
+Performance criteria: (What does it mean to win the game?) Online vs batch/offline. 
+``accuracy'' of a hypothesis. Form of a hypothesis (too complicated, no concise explanation, hard to communicate). 
+
+Some models we will cover: Online Mistake Bound Model; Probably Approximately Correct (PAC) Model; Statistical Queries (Only statistical queries); Exact Learning Models (from queries). 
+
+What are we going to study about these models? Describe and Analyze specific algorithms (just play a game). General Techniques for designing learning algorithms. How much data do we need? Computational Impediments: (as opposed to data barriers) we can see about how P vs. NP becomes relevant and cryptography, learning from noisy data. ``Boosting''. Comparing learning models. 
+
+\subsection{Basic Notions and Notations}
+
+\(X\) is a domain for functions we want to learn (finite or infinite). \(c\), a concept is a function. 
+
+``Encodings of objects'': \(X\) may be \(\{0, 1\}^n\) or \(\R^n\).  
+
+\(c: X \to 2\). Or \(c \subset X\).
+
+\(\mcC\) is a ``concept class'' or a set of concepts. 
+
+\(X\) may be called a instance space. \(x\) an instance or unlabled instance. and \((x, c(x))\) is a labled instance. 
+
+Basic idea of our models: There is a concept class \(\mcC\), some unknown ``target concept'' \(c \in \mcC\). Learner knows \(\mcC\) but not \(c\). 
+
+Learner has some kind of information about ``how \(c\) labels instances''. 
+
+Goal: find or approximate \(c\). 
+
+Some examples of concept classes: \(X = \{0, 1\}^n\). \(\mcC\) is all boolean conjunctions. ``Literal'' is a variable or negation thereof, \(x_i\) or \( \bar{x_i}\). 
+And a boolean conjunction is a conjunction of literals. 
+
+Theme: EFFICIENCY (polynomial in \(n\))
+
+Exponential is bad. \(\log(n)^2\) is great. 
+
+There are \(3^n\) boolean conjunctions so do something clever. 
+
+\section{September 10th:}
+
+\subsection{What we did last time:}
+Overview, Learning Models, started notions and notations. 
+
+\subsection{Overview for today:}
+Finish notions and notations and first learning model (OMBL, oline mistake bound) and do some specific algorithms (learning intervals, monotone disjunctions, decision lists).  
+
+\subsection{Recall example with boolean conjunctions:}
+\(|\mcC| = 3^n\). Do something non-trivial. 
+(Of course we can also do all disjunctions)
+(And monotonicity will mean no negations in both cases I think)
+
+In the case of all monotone conjunctions \(|\mcC| = 2^n\) so also we need to do something clever. 
+
+We don't want to go to crazy with arbitrary formulae. But \(\mcC_s = \{\text{all } s\text{-term DNFs}\}\). 
+DNF is disjunctive normal form is a disjunction of conjunctions (we call the conjunctions terms). 
+That a formula is an \(s\)-term DNF means it has at most \(s\) terms.  Size is roughly at most \((3^n)^s\).
+
+Now we limit to ``\(k\)-DNFs''. We're going to consider \(\mcC = k\)-DNFs or ``width \(k\)'' DNFs (sometimes). These can have arbitrarily many terms but at most \(k\) literals per term. 
+At most distinct terms \((2n)^k\) terms. ``\(s\)-term \(k\)-DNFs'' are also a thing. (also restrictions on how many times a literal appears etc.)
+
+How easy or hard is this classes (these classes) to learn?
+
+\subsection{one more class:}
+\(X = \R^n\) and \(\mcC\) is the class of all linear threshold functions (LTF) over \(X\) (aka wighted majorities, perceptrons of order 1 is super retro, threshold gates). 
+Computes the inner product with a fixed vector and compares it with a fixed threshold. (Also called half spaces for clear reasons). 
+
+\textbf{Definition.}
+A Boolean-valued function \(c:X \to 2\) is an \emph{LTF} if \(\E n\) weights \(w_1, \ldots, w_n \in \R\) and a threshold \(\theta\in\R\) if \(\A x \in X\) \(c(x) =1 \iff \langle w, x\rangle \geq \theta\) where \(\langle\cdot, \cdot\rangle\) is the std ``dot product''.
+
+Also, CNFs are like DNFs but dual. And they have clauses not terms. 
+
+Relations between different classes. Converting DNFs and CNFs. Can we convert CNFs and LTFs?
+
+\subsection{Online Mistake-Bound Learning}
+``Like learning to ride a bike without training wheels''. Make mistakes and learn as you go. 
+``Learn as you go''.
+Notion of a learning session: What happens when you run the algorithms. It consists of a sequence of trials. 
+Learners always maintain a hypothesis (function, a boolean function, \(h: X \to 2\)). 
+
+Learning an unknown target \(c \in \mcC\) where \(\mcC\) is known to the learner. 
+Trial: Get an example, make a prediction, told right or wrong (when wrong, charged somehow), updates hypothesis (this is where the magic happens). 
+
+No ``noise''. All feedback is right. 
+\footnote{Thought: can we learn a concept not in \(\mcC\) relative to \(\mcC\). i.e. the feedback might not be consistent with any \(c \in \mcC\) but isn't mistaken.}
+
+Performance measure: total \(\#\) of mistakes. 
+
+\textbf{Definition:} a learning algorithm \(A\) has a mistake bound \(M\) on concept class \(\mcC\) if for any sequence of examples and any target \(A\) makes fewer than \(M\) mistakes in its learning session. 
+
+Note: this definition is really mostly good for finite domains, \(X\).
+It's clear that we can achieve \(M\) with \(|X|\) i.e. just try everything. 
+Similarly with \(|\mcC| - 1\) if \(\mcC\) is finite. (You can even do a \(\log(|\mcC|)\) with a binary search kind of thing). 
+We want something better. if \(X = 2^n\) or \(\R^n\) we want poly\((n)\). 
+
+A Learning algo: \(X = \{0, 1, \ldots, N\}\). \(\mcC\) is initial intervals. (downward closed). 
+\(|X| = |\mcC| = N + 1\). Do binary search. Initial \(h\) is just the first half. When you get something wrong you've eliminated at least half of the remaining options. Choose as your threshold or cutoff as middle of remaining options (which are all in one interval, or their thresholds are). Details aside, it's \(O(\log N)\). It is efficient in terms of running time and doesn't make too many mistakes. 
+
+What if \(X = [0, 1] \subset \R\). (No finite MB). 
+
+\subsection{Some OLMB Algorithms:}
+Learning monotone disjunctions: (All \(2^n\) Monotone disjunctions). 
+``Elimination algorithm'' (appears in some philosopher, so very natural). 
+Let \(S_0 = \) the set of all variables. and \(h_i = \bigvee_{s \in S_i}s\). Will never output 0 when answer is 1 (fail). 
+When outputs 1, but answer is 0, remove all variables in \(x\) which were true from \(S_n\) and keep the rest for \(S_{n+1}\).
+
+Claim 1: No variable in \(S_c\) ever removed from \(S_i\) (by construction).
+
+Claim 2: No false positive mistakes (doesn't fail). We assume run on monotone disjunction. Because \(S_i \supset S_c\) always by construction. 
+
+Claim 3: This alg has mistake bound \(n\). On each mistake remove at least 1 wrong variable so at most \(n\) mistakes. 
+
+
+\end{document}
